@@ -12,14 +12,17 @@ import javafx.beans.value.ObservableValue;
 public class FXRequestVector implements RequestVector {
 
     private final IntegerProperty bitVector = new SimpleIntegerProperty( 0 );
+    @Override
     public final int get() {
         return bitVector.get();
     }
 
+    @Override
     public final void set( int value ) {
         bitVector.set( value );
     }
 
+    @Override
     public final IntegerProperty bitVectorProperty() {
         return bitVector;
     }
@@ -27,6 +30,11 @@ public class FXRequestVector implements RequestVector {
     private static final long ALL_ONES = -1;
     private final int floors;
     private final String name;
+
+    @Override
+    public String getName() {
+        return name;
+    }
 
     /**
      * Create a named schedule vector implementation.

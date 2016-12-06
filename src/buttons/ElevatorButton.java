@@ -15,7 +15,11 @@ import javafx.scene.control.Button;
 public class ElevatorButton extends Button {
 
     private final BooleanProperty lightOn = new SimpleBooleanProperty( false );
-    final int floor;
+    private final int floor;
+
+    public int getFloor() {
+        return floor;
+    }
 
     public boolean isLightOn() {
         return lightOn.get();

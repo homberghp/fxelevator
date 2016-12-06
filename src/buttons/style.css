@@ -2,6 +2,14 @@
     -fx-background-color: black;
 }
 
+Label{
+    -fx-text-fill:white;
+    
+}
+RequestMonitor {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Courier New";
+}
 .elevator-button {
     -fx-background-radius: 10;
     -fx-background-insets: 0,1,2,3,0;
@@ -27,6 +35,16 @@
         linear-gradient(#efff84, #baf244),
         linear-gradient(#eaff6a, #aaef22),
         linear-gradient(#e6ff57 0%, #c2f802 50%, #a1ee0b 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    
+    
+}
+.lit-blue{
+    -fx-background-color: 
+            linear-gradient(#d65bff, #8400e6),
+        linear-gradient(#ef84ff, #ba44f2),
+        linear-gradient(#ea6aff, #aa22ef),
+        linear-gradient(#e657ff 0%, #c202f8 50%, #a10bee 100%),
         linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
     
     

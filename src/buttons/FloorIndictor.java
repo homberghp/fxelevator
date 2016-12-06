@@ -23,8 +23,8 @@ public class FloorIndictor extends HBox {
     }
 
     final void initialize( int floors ) {
-        for ( int i = 0; i < indicators.length; i++ ) {
-            indicators[ i ] = new ElevatorButton( i );
+        for ( int i = 0; i < floors; i++ ) {
+            indicators[ floors-1-i ] = new ElevatorButton( floors-1-i );
         }
         this.getChildren().addAll( indicators );
 

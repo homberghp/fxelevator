@@ -29,6 +29,23 @@ public class ElevatorIndicator extends Label {
         initialize();
     }
 
+    public ElevatorIndicator setBasicStyleClass(String styleClass){
+        getStyleClass().clear();
+        getStyleClass().addAll( styleClass, "off" );
+        return this;
+    }
+
+    private String litStyleClass="lit";
+
+    public String getLitStyleClass() {
+        return litStyleClass;
+    }
+
+    public ElevatorIndicator setLitStyleClass( String litStyleClass ) {
+        this.litStyleClass = litStyleClass;
+        return this;
+    }
+    
     final void initialize() {
         getStyleClass().addAll( "indicator-label", "off" );
         if ( vector != null ) {
@@ -36,15 +53,14 @@ public class ElevatorIndicator extends Label {
             this.lightOn.bind( bb );
         }
         lightOn.addListener( this::changed );
-
     }
 
     private void changed( ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) {
         if ( newValue ) {
             getStyleClass().remove( "off" );
-            getStyleClass().add( "lit" );
+            getStyleClass().add( litStyleClass );
         } else {
-            getStyleClass().remove( "lit" );
+            getStyleClass().remove( litStyleClass );
             getStyleClass().add( "off" );
 
         }

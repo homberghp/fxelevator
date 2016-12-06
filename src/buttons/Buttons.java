@@ -19,21 +19,19 @@ public class Buttons extends Application {
     @Override
     public void start( Stage primaryStage ) {
         int n = 8;
-        final ElevatorButton btn1 = new ElevatorButton( 1 );
-        final ElevatorButton btn2 = new ElevatorButton( 2 );
         final ElevatorButton[] btn = new ElevatorButton[ n ];
-        final FXRequestVector vec = new FXRequestVector( n );
-        final FXRequestVector upVec = new FXRequestVector( n );
-        final FXRequestVector downVec = new FXRequestVector( n );
+        final FXRequestVector upVec = new     FXRequestVector("UP requests", n );
+        final FXRequestVector downVec = new   FXRequestVector("DW requests", n );
+        final FXRequestVector vec = new FXRequestVector("TG requests", n );
         final RequestMonitor mon = new RequestMonitor( vec );
-        final RequestMonitor upmon = new RequestMonitor( upVec );
-        final RequestMonitor downMon = new RequestMonitor( downVec );
+        final RequestMonitor upMon = new RequestMonitor( upVec );
+        final RequestMonitor downMon = new RequestMonitor( downVec, "lit-blue");
         final FloorPanel[] floorPanels = new FloorPanel[ n ];
         final VBox bld = new VBox();
         for ( int f = 0; f < n; f++ ) {
 
             final FloorPanel floorPanel = new FloorPanel( f, upVec, downVec );
-            floorPanels[ f ] = floorPanel;
+            floorPanels[  n - 1 -f ] = floorPanel;
         }
         bld.getChildren().addAll( floorPanels );
         
@@ -43,43 +41,37 @@ public class Buttons extends Application {
                 final ElevatorButton source = ( ElevatorButton ) e.getSource();
                 source.toggle();
                 if ( source.isLightOn() ) {
-                    vec.add( source.floor );
+                    vec.add( source.getFloor() );
                 } else {
-                    vec.remove( source.floor );
+                    vec.remove( source.getFloor() );
                 }
             } );
-            btn[ btn.length - 1 - i ] = b;
+            btn[ n - 1 - i ] = b;
         }
 
         final ElevatorButton up = new ElevatorButton( "\u22b2", 0 );
         up.rotateProperty().set( 90 );
         final ElevatorButton down = new ElevatorButton( "\u22b2", 0 );
         down.rotateProperty().set( -90 );
-        final FloorIndictor fi = new FloorIndictor( 12, 4.0 );
+        final FloorIndictor fi = new FloorIndictor( n, 4.0 );
         //btn.setText( "Say 'Hello World'" );
-        btn1.setLightOn( true );
-        btn1.setLightOn( false );
         int f = 0;
         final BackgroundFill y = new BackgroundFill( Color.YELLOW, null, null );
         Background bg = new Background( y );
-        btn1.setOnAction( ( ActionEvent event ) -> {
-            System.out.println( "Hello btn1!" );
-            btn2.setLightOn( !btn2.isLightOn() );
-            fi.goUp();
-        } );
-        btn2.setOnAction( ( ActionEvent event ) -> {
-            System.out.println( "Hello btn2!" );
-            btn1.setLightOn( !btn1.isLightOn() );
-            fi.goDown();
-        } );
 
         up.setOnAction( ( ActionEvent event ) -> {
-            up.setLightOn( !up.isLightOn() );
-            fi.moveUpFrom( fi.getFloor() );
+            System.out.println( "Hello btn1!" );
+            fi.goUp();
+            int visiting= fi.getFloor();
+            vec.remove( visiting );
+            upVec.remove( visiting );
         } );
         down.setOnAction( ( ActionEvent event ) -> {
-            down.setLightOn( !down.isLightOn() );
-            fi.moveDownFrom( fi.getFloor() );
+            System.out.println( "Hello btn2!" );
+            fi.goDown();
+            int visiting= fi.getFloor();
+            vec.remove( visiting );
+            downVec.remove( visiting );
         } );
 
         VBox root = new VBox();
@@ -88,10 +80,10 @@ public class Buttons extends Application {
         root.setId( "root" );
         System.out.println( "root.getId() = " + root.getId() );
         vbox2.getChildren().addAll( btn );
-        hbox.getChildren().addAll( bld,vbox2, mon );
-        root.getChildren().addAll( btn1, btn2, fi, up, down, hbox );
+        hbox.getChildren().addAll( bld,vbox2);
+        root.getChildren().addAll( mon ,upMon,downMon, fi, up, down, hbox );
 
-        Scene scene = new Scene( root, 300, 250 );
+        Scene scene = new Scene( root, 300, 650 );
         scene.getStylesheets().add( "buttons/style.css" );
 
         primaryStage.setTitle( "Hello World!" );

@@ -150,4 +150,6 @@ public interface RequestVector {
             }
         };
     }
+
+    String getName();
 }

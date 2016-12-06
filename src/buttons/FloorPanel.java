@@ -21,6 +21,7 @@ public class FloorPanel extends VBox {
         this.floor=floor;
         this.upVector = upVector;
         this.downVector = downVector;
+        initialize();
     }
 
     
@@ -31,22 +32,22 @@ public class FloorPanel extends VBox {
     }
 
     private ElevatorButton createDownButton(int fl) {
-        final ElevatorButton down = new ElevatorButton( "\u22b2", 0 );
+        final ElevatorButton down = new ElevatorButton( "\u22b2", fl );
         down.rotateProperty().set( -90 );
         down.setOnAction( ( ActionEvent event ) -> {
             ElevatorButton b = (ElevatorButton) event.getSource();
-            downVector.add(b.floor);
+            downVector.add(b.getFloor());
         } );
         down.onOffProperty().bind(downVector.createFloorBinding( fl ) );
         return down;
     }
 
     private ElevatorButton createUpButton(int fl ) {
-        final ElevatorButton up = new ElevatorButton( "\u22b2", 0 );
+        final ElevatorButton up = new ElevatorButton( "\u22b2", fl );
         up.rotateProperty().set( 90 );
         up.setOnAction( ( ActionEvent event ) -> {
             ElevatorButton b = (ElevatorButton) event.getSource();
-            upVector.add(b.floor);
+            upVector.add(b.getFloor());
         } );
         up.onOffProperty().bind(upVector.createFloorBinding( fl ) );
         return up;
