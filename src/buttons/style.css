@@ -4,7 +4,7 @@
 
 Label{
     -fx-text-fill:white;
-    
+
 }
 RequestMonitor {
     -fx-font-size: 16pt;
@@ -36,18 +36,25 @@ RequestMonitor {
         linear-gradient(#eaff6a, #aaef22),
         linear-gradient(#e6ff57 0%, #c2f802 50%, #a1ee0b 100%),
         linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
-    
-    
+
+
 }
 .lit-blue{
     -fx-background-color: 
-            linear-gradient(#d65bff, #8400e6),
-        linear-gradient(#ef84ff, #ba44f2),
-        linear-gradient(#ea6aff, #aa22ef),
-        linear-gradient(#e657ff 0%, #c202f8 50%, #a10bee 100%),
+        linear-gradient(#5bd6ff, #0084e6),
+        linear-gradient(#84efff, #44baf2),
+        linear-gradient(#6aeaff, #22aaef),
+        linear-gradient(#57e6ff 0%, #02c2f8 50%, #0ba1ee 100%),
         linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
-    
-    
+}
+
+.lit-red{
+    -fx-background-color: 
+        linear-gradient(#ff5bd6, #e60064),
+        linear-gradient(#ff84ef, #f2448a),
+        linear-gradient(#ff6aea, #ef226a),
+        linear-gradient(#ff57c6 0%, #f80282 50%, #ee0b61 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
 }
 .on {
     -fx-background-color: 

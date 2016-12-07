@@ -2,7 +2,6 @@ package buttons;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 /**
  * A simple floor indicator.
@@ -30,7 +29,7 @@ public class RequestMonitor extends HBox {
     final void initialize() {
         int floors = indicators.length;
         for ( int i = 0; i < floors; i++ ) {
-            indicators[ floors - 1 - i ] = new ElevatorIndicator( i, vector ).setLitStyleClass( style );
+            indicators[ floors - 1 - i ] = new ElevatorIndicator( i, vector.bitVectorProperty() ).setLitStyleClass( style );
         }
         this.getChildren().addAll( indicators );
     }

@@ -137,18 +137,7 @@ public interface RequestVector {
     int getFloorCount();
 
     default BooleanBinding createFloorBinding( final int floor ) {
-
-        return new BooleanBinding() {
-            {
-                super.bind( bitVectorProperty() );
-            }
-
-            @Override
-            protected boolean computeValue() {
-                boolean b = ( RequestVector.this.get() & ( 1 << floor ) ) != 0;
-                return b;
-            }
-        };
+        return BindingUtils.bindIntegerBit( this.bitVectorProperty(), floor );
     }
 
     String getName();

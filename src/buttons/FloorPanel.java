@@ -6,50 +6,51 @@
 package buttons;
 
 import javafx.event.ActionEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 
 /**
  *
  * @author Pieter van den Hombergh {@code <p.vandenhombergh@fontys.nl>}
  */
-public class FloorPanel extends VBox {
+public class FloorPanel extends GridPane {
 
     final RequestVector upVector;
     final RequestVector downVector;
     final int floor;
+
     public FloorPanel( int floor, RequestVector upVector, RequestVector downVector ) {
-        this.floor=floor;
+        this.floor = floor;
         this.upVector = upVector;
         this.downVector = downVector;
         initialize();
     }
 
-    
     final void initialize() {
         ElevatorButton up = createUpButton( floor );
-        ElevatorButton down =createDownButton( floor );
-        getChildren().addAll(up,down);
+        ElevatorButton down = createDownButton( floor );
+        this.add( up, 0, 0 );
+        this.add( down, 0, 3 );
     }
 
-    private ElevatorButton createDownButton(int fl) {
+    private ElevatorButton createDownButton( int fl ) {
         final ElevatorButton down = new ElevatorButton( "\u22b2", fl );
         down.rotateProperty().set( -90 );
         down.setOnAction( ( ActionEvent event ) -> {
-            ElevatorButton b = (ElevatorButton) event.getSource();
-            downVector.add(b.getFloor());
+            ElevatorButton b = ( ElevatorButton ) event.getSource();
+            downVector.add( b.getFloor() );
         } );
-        down.onOffProperty().bind(downVector.createFloorBinding( fl ) );
+        down.onOffProperty().bind( downVector.createFloorBinding( fl ) );
         return down;
     }
 
-    private ElevatorButton createUpButton(int fl ) {
+    private ElevatorButton createUpButton( int fl ) {
         final ElevatorButton up = new ElevatorButton( "\u22b2", fl );
         up.rotateProperty().set( 90 );
         up.setOnAction( ( ActionEvent event ) -> {
-            ElevatorButton b = (ElevatorButton) event.getSource();
-            upVector.add(b.getFloor());
+            ElevatorButton b = ( ElevatorButton ) event.getSource();
+            upVector.add( b.getFloor() );
         } );
-        up.onOffProperty().bind(upVector.createFloorBinding( fl ) );
+        up.onOffProperty().bind( upVector.createFloorBinding( fl ) );
         return up;
     }
 

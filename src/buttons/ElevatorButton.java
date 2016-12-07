@@ -60,22 +60,29 @@ public class ElevatorButton extends Button {
 
     final void initialize() {
         getStyleClass().addAll( "elevator-button", "off" );
-        lightOn.addListener( this::changed);
+        lightOn.addListener( this::changed );
     }
 
-    private void changed( ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) {
+    void changed( ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) {
+        System.out.println( this+" has changed to "+newValue );
         if ( newValue ) {
+        System.out.println( this+" x has changed to "+newValue );
             getStyleClass().remove( "off" );
             getStyleClass().add( "on" );
         } else {
+        System.out.println( this+" y has changed to "+newValue );
             getStyleClass().remove( "on" );
             getStyleClass().add( "off" );
-
         }
-
     }
 
     public void toggle() {
         lightOn.set( !lightOn.get() );
     }
+
+    @Override
+    public String toString() {
+        return "ElevatorButton{" + "lightOn=" + lightOn + ", floor=" + floor + '}';
+    }
+    
 }

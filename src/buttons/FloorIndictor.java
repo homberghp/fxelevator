@@ -1,5 +1,7 @@
 package buttons;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.HBox;
 
 /**
@@ -10,7 +12,7 @@ import javafx.scene.layout.HBox;
 public class FloorIndictor extends HBox {
 
     final ElevatorButton[] indicators;
-
+    private final IntegerProperty indicatorBits = new SimpleIntegerProperty(1);
     public FloorIndictor( int floors ) {
         indicators = new ElevatorButton[ floors ];
         initialize( floors );
@@ -24,47 +26,39 @@ public class FloorIndictor extends HBox {
 
     final void initialize( int floors ) {
         for ( int i = 0; i < floors; i++ ) {
-            indicators[ floors-1-i ] = new ElevatorButton( floors-1-i );
+            ElevatorButton b = new ElevatorButton( i );
+            b.onOffProperty().bind(BindingUtils.bindIntegerBit( indicatorBits, i ));
+            indicators[ floors-1-i ] = b;
+            
         }
         this.getChildren().addAll( indicators );
-
-        this.indicators[ 0 ].setLightOn();
     }
 
     private int onMask = 1;
     private int floor = 0;
-
+    private boolean between=false;
     void setFloor( int f ) {
         clearLights();
         f %= indicators.length;
         onMask = 1 << f;
-        indicators[ f ].setLightOn( true );
+        set(onMask);
+
         floor = f;
-        System.out.println( "floor = " + floor );
+        between=false;
     }
 
     private void setBetweenFloors( int f, int g ) {
         f %= indicators.length;
         g %= indicators.length;
-        clearLights();
-        indicators[ f ].setLightOn();
-        indicators[ g ].setLightOn();
+        between=true;
         onMask = ( 1 << f ) | ( 1  << g  );
+        set(onMask);
         floor = f;
-        System.out.println( "f = " + f );
-        System.out.println( "g = " + g );
-        System.out.println( "floor = " + floor );
     }
 
     private void clearLights() {
-        int m = onMask;
-        int i = Integer.numberOfTrailingZeros( m );
-        while ( m != 0 && i < indicators.length ) {
-            indicators[ i ].setLightOff();
-            m &= ~( 1 << i );
-            i = Integer.numberOfTrailingZeros( m );
-        }
-        onMask = 0;
+        set(onMask = 0);
+        floor=0;
     }
 
     public int getFloor() {
@@ -87,5 +81,13 @@ public class FloorIndictor extends HBox {
 
     public void moveDownFrom( int f ) {
         setBetweenFloors( f, f + indicators.length - 1 );
+    }
+
+    private void set( int m ) {
+        indicatorBits.set(m);
+    }
+
+    public boolean isBetween() {
+        return between;
     }
 }

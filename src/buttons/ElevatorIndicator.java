@@ -1,6 +1,7 @@
 package buttons;
 
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.IntegerExpression;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -16,13 +17,13 @@ public class ElevatorIndicator extends Label {
 
     private final BooleanProperty lightOn = new SimpleBooleanProperty( false );
     final int floor;
-    private RequestVector vector = null;
+    private IntegerExpression vector = null;
 
     public boolean isLightOn() {
         return lightOn.get();
     }
 
-    public ElevatorIndicator( int floor, RequestVector vector ) {
+    public ElevatorIndicator( int floor, IntegerExpression vector ) {
         super( "" + floor );
         this.vector=vector;
         this.floor = floor;
@@ -49,7 +50,7 @@ public class ElevatorIndicator extends Label {
     final void initialize() {
         getStyleClass().addAll( "indicator-label", "off" );
         if ( vector != null ) {
-            BooleanBinding bb = vector.createFloorBinding( floor );
+            BooleanBinding bb = BindingUtils.bindIntegerBit( vector, floor );
             this.lightOn.bind( bb );
         }
         lightOn.addListener( this::changed );
