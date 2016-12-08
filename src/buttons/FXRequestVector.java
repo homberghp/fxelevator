@@ -45,7 +45,7 @@ public class FXRequestVector implements RequestVector {
     public FXRequestVector( String name, int maxFloor ) {
         this.name = name;
         floors = maxFloor;
-        bitVectorProperty().addListener( new DebugListener());
+        //bitVectorProperty().addListener( new DebugListener());
     }
 
     /**
@@ -140,8 +140,6 @@ public class FXRequestVector implements RequestVector {
             return Integer.MIN_VALUE;
         }
         int mask = ~(-1 << (fromFloor));
-        System.out.println( "fromFloor = " + fromFloor);
-        System.out.println( "m = "+Integer.toBinaryString( mask ) );
         return 31-Integer.numberOfLeadingZeros( get() & mask );
     }
 

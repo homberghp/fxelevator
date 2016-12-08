@@ -56,7 +56,6 @@ public class Buttons extends Application {
         Background bg = new Background( y );
 
         up.setOnAction( ( ActionEvent event ) -> {
-            System.out.println( "Hello btn1!" );
             if ( fi.isBetween() ) {
                 fi.goUp();
             } else {
@@ -68,7 +67,6 @@ public class Buttons extends Application {
             upVec.remove( visiting );
         } );
         down.setOnAction( ( ActionEvent event ) -> {
-            System.out.println( "Hello btn2!" );
             if ( fi.isBetween() ) {
                 fi.goDown();
             } else {
@@ -84,7 +82,6 @@ public class Buttons extends Application {
         HBox hbox = new HBox();
         HBox hbox2 = new HBox();
         root.setId( "root" );
-        System.out.println( "root.getId() = " + root.getId() );
         hbox.getChildren().addAll( bld);
         Region r1 = new Region();
         hbox2.setHgrow( r1, Priority.ALWAYS);

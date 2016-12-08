@@ -64,16 +64,14 @@ public class ElevatorButton extends Button {
     }
 
     void changed( ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) {
-        System.out.println( this+" has changed to "+newValue );
+        if (!oldValue.equals( newValue )){
         if ( newValue ) {
-        System.out.println( this+" x has changed to "+newValue );
             getStyleClass().remove( "off" );
             getStyleClass().add( "on" );
         } else {
-        System.out.println( this+" y has changed to "+newValue );
             getStyleClass().remove( "on" );
             getStyleClass().add( "off" );
-        }
+        }}
     }
 
     public void toggle() {

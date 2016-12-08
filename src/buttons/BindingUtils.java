@@ -23,7 +23,6 @@ public class BindingUtils {
             @Override
             protected boolean computeValue() {
                 boolean v = ( exp.get() & ( 1 << bit ) ) != 0;
-//                System.out.println( "new value ="+v );
                 return v;
             }
         };
